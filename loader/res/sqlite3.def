@@ -1,0 +1,10 @@
+EXPORTS
+
+sqlite3_reset
+sqlite3_finalize
+sqlite3_column_text
+sqlite3_step
+sqlite3_bind_text
+sqlite3_prepare_v2
+sqlite3_open
+sqlite3_close

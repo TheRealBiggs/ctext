@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Deps">
+      <UniqueIdentifier>{0d0f5d33-5da9-40bf-9cfe-546e8debb804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Deps\minhook">
+      <UniqueIdentifier>{52f1cf4a-1155-4637-aeec-5ccc194be246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hooks">
+      <UniqueIdentifier>{942868e5-0726-4a67-b123-9633c793a67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scenes">
+      <UniqueIdentifier>{cca10186-842f-49cf-9502-b571b5ff56e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ct">
+      <UniqueIdentifier>{ab0c0570-3e1a-4392-a472-f2661f4bcdc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ct">
+      <UniqueIdentifier>{b2f71498-e0f4-4d22-aea6-fd4ab8994e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ct\audio">
+      <UniqueIdentifier>{51a91d7e-552d-402e-b077-ce87d1662d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ct\input">
+      <UniqueIdentifier>{9c6270ed-e48b-4ed2-8363-4ad36fd1b735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ct\scene">
+      <UniqueIdentifier>{5157a285-b2d2-4431-b15f-b361f911d564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ct\ui">
+      <UniqueIdentifier>{97c1f899-17ba-4b31-8def-ad94b6f8910e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\io">
+      <UniqueIdentifier>{4f8a1ace-0c90-4c18-ac6f-32b7bbf0dc7a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\modules\minhook\src\buffer.c">
+      <Filter>Deps\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\modules\minhook\src\hde\hde32.c">
+      <Filter>Deps\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\modules\minhook\src\hook.c">
+      <Filter>Deps\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\modules\minhook\src\trampoline.c">
+      <Filter>Deps\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\sqexlogo_hook.cpp">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\logo.ixx">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctext.voice_acting_manager.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctext.singleton.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctext.audio_manager.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctext.ma_sound_task.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\audio\ct.audio.ixx">
+      <Filter>Source Files\ct\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\audio\ct.audio.sound_manager.ixx">
+      <Filter>Source Files\ct\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\audio\ct.audio.sound_obj.ixx">
+      <Filter>Source Files\ct\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\audio\ct.audio.sound_task.ixx">
+      <Filter>Source Files\ct\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\input\ct.input.ixx">
+      <Filter>Source Files\ct\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\input\ct.input.virtual_controller.ixx">
+      <Filter>Source Files\ct\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\scene\ct.scene.ixx">
+      <Filter>Source Files\ct\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\scene\ct.scene.name_input_scene.ixx">
+      <Filter>Source Files\ct\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\scene\ct.scene.scene_manager.ixx">
+      <Filter>Source Files\ct\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ct.chrono_canvas.ixx">
+      <Filter>Source Files\ct</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ct.field_impl.ixx">
+      <Filter>Source Files\ct</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ct.ixx">
+      <Filter>Source Files\ct</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ct.text_manager.ixx">
+      <Filter>Source Files\ct</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ui\ct.ui.ixx">
+      <Filter>Source Files\ct\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ui\ct.ui.msg_window.ixx">
+      <Filter>Source Files\ct\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.ctr.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.detchman_resource.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.field_impl.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.msg_window.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.name_input_scene.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.sound_manager.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.sqexlogo.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hooks\ctext.hooks.text_manager.ixx">
+      <Filter>Source Files\hooks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\ctext.io.file_entry.ixx">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\ctext.io.filesystem_file_entry.ixx">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\ctext.io.ixx">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="src\io\ctext.io.zip_file_entry.ixx">
+      <Filter>Source Files\io</Filter>
+    </ClCompile>
+    <ClCompile Include="deps\miniz\miniz.c">
+      <Filter>Deps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctext.config.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\helpers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\build_config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="res\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ct\subs.hpp">
+      <Filter>Header Files\ct</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ct\unkstructh.hpp">
+      <Filter>Header Files\ct</Filter>
+    </ClInclude>
+    <ClInclude Include="deps\glfw3\glfw3.h">
+      <Filter>Deps</Filter>
+    </ClInclude>
+    <ClInclude Include="deps\glfw3\glfw3native.h">
+      <Filter>Deps</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res\resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="res\ctext.json" />
+  </ItemGroup>
+</Project>

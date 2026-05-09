@@ -1,0 +1,21 @@
+{
+	"fixes": {
+		"revert_diagonal_movement": true
+	},
+
+	"font": {
+		"force_nearest_filter": true,
+
+		"use_custom_font": true,
+		"custom_font": "ChronoType.ttf",
+
+		"use_fixed_font_size": true,
+		"fixed_font_size": 16
+	},
+
+	"mods": {
+		"load_order": [
+
+		]
+	}
+}
