@@ -202,5 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="res\ctext.json" />
+    <CopyFileToFolders Include="res\ChronoType.ttf" />
   </ItemGroup>
 </Project>
