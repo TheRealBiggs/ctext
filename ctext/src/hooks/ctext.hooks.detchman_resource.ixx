@@ -81,7 +81,8 @@ export namespace ctext::hooks {
 
 		for (const auto& load : loadOrder) {
 			auto modPath = "mods" / std::filesystem::path(load);
-			auto ctpPath = modPath.replace_extension(".ctp");
+			std::filesystem::path ctpPath(modPath);
+			ctpPath.replace_extension(".ctp");
 
 			if (std::filesystem::exists(ctpPath)) {
 				LoadCtpArchive(ctpPath);
