@@ -6,6 +6,8 @@ export module ctext.hooks:sound_task;
 
 import ct.audio;
 
+import std;
+
 
 namespace {
 	HOOK_CLSFN(SoundTask_stop, ct::audio::SoundTask) {
@@ -27,9 +29,6 @@ namespace {
 				auto start = loopStart / (float)rate;
 				auto end = loopEnd / (float)rate;
 				auto duration = end - start;
-
-				printf("%x, %x\n", _this->sound->dword4, *(uint32_t*)_this->sound->gap);
-				printf("%f - %f\n", start, end);
 
 				if (time > end) {
 					time -= start;

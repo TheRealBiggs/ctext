@@ -42,11 +42,7 @@ namespace {
 			time = ct::audio::prevBgmTime;
 
 			ct::audio::resumePrevBgm = false;
-			//ct::audio::prevBgmId = 0;
-			//ct::audio::prevBgmTime = 0;
 		}
-
-		printf("%f\n", time);
 
 		task->init(sound, a3);
 		task->play(time);
