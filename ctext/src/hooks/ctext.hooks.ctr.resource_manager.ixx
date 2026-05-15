@@ -14,7 +14,9 @@ import std;
 namespace {
 	HOOK_RET(ctr_ResourceManager_createTexture, __fastcall, cocos2d::Texture2D*, std::string* filename, cocos2d::Image* image) {
 		auto* res = CALL_ORIG(ctr_ResourceManager_createTexture, filename, image);
-		res->setTexParameters({ GL_NEAREST, GL_NEAREST, GL_CLAMP, GL_CLAMP });
+
+		if (res != nullptr)
+			res->setTexParameters({ GL_NEAREST, GL_NEAREST, GL_CLAMP, GL_CLAMP });
 
 		return res;
 	}
