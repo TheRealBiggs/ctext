@@ -27,7 +27,7 @@ export namespace ctext {
 			auto* sound = BorrowSound();
 
 			if (!InitialiseSoundFromFile(sound, filepath))
-				return -1;			
+				return -1;
 
 			auto id = nextSoundId++;
 
@@ -59,26 +59,26 @@ export namespace ctext {
 			return id;
 		}
 
-		int PlayLooping(const std::string& filepath, uint64_t loopStart, uint64_t loopEnd) {
-			auto* sound = BorrowSound();
+		//int PlayLooping(const std::string& filepath, uint64_t loopStart, uint64_t loopEnd) {
+		//	auto* sound = BorrowSound();
 
-			if (!InitialiseSoundFromFile(sound, filepath))
-				return -1;
+		//	if (!InitialiseSoundFromFile(sound, filepath))
+		//		return -1;
 
-			if (!SetupSoundLoop(sound, loopStart, loopEnd))
-				return -1;
+		//	if (!SetupSoundLoop(sound, loopStart, loopEnd))
+		//		return -1;
 
-			if (!StartSound(sound))
-				return -1;
-			
-			auto id = nextSoundId++;
+		//	if (!StartSound(sound))
+		//		return -1;
 
-			activeSounds[id] = sound;
+		//	auto id = nextSoundId++;
 
-			return id;
-		}
+		//	activeSounds[id] = sound;
 
-		int PlayLooping(const uint8_t* data, size_t dataLen, uint64_t loopStart, uint64_t loopEnd) {
+		//	return id;
+		//}
+
+		int PlayLooping(const uint8_t* data, size_t dataLen, uint64_t loopStart, uint64_t loopEnd, float startTime = 0) {
 			auto* sound = BorrowSound();
 
 			if (!InitialiseSoundFromData(sound, data, dataLen))
@@ -86,6 +86,9 @@ export namespace ctext {
 
 			if (!SetupSoundLoop(sound, loopStart, loopEnd))
 				return -1;
+
+			if (startTime > 0)
+				ma_sound_seek_to_second(sound, startTime);
 
 			if (!StartSound(sound))
 				return -1;
@@ -115,11 +118,14 @@ export namespace ctext {
 			ma_sound_set_volume(activeSounds[id], volume);
 		}
 
-		int GetTime(int id) {
+		float GetTime(int id) {
 			if (!activeSounds.contains(id))
 				return -1;
 
-			return static_cast<int>(ma_sound_get_time_in_pcm_frames(activeSounds[id]));
+			auto sound = activeSounds[id];
+			auto rate = (float)ma_engine_get_sample_rate(ma_sound_get_engine(sound));
+
+			return ma_sound_get_time_in_pcm_frames(sound) / rate;
 		}
 
 		bool IsPlaying(int id) {

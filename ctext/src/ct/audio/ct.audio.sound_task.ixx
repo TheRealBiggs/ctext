@@ -20,7 +20,7 @@ export namespace ct::audio {
 		
 		};
 
-		virtual void init(SoundObj* sound, int a2) = 0;
+		virtual void init(ct::audio::SoundObj* sound, int a2) = 0;
 		virtual void dispose() = 0;
 		virtual void update() = 0;
 		virtual void play(float a1) = 0;

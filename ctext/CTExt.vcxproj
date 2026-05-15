@@ -132,6 +132,7 @@
     <ClCompile Include="src\ct\ui\ct.ui.msg_window.ixx" />
     <ClCompile Include="src\hooks\ctext.hooks.ctr.resource_manager.ixx" />
     <ClCompile Include="src\hooks\ctext.hooks.sound_manager.ixx" />
+    <ClCompile Include="src\hooks\ctext.hooks.sound_task.ixx" />
     <ClCompile Include="src\hooks\ctext.hooks.text_manager.ixx" />
     <ClCompile Include="src\hooks\ctext.hooks.ctr.ixx" />
     <ClCompile Include="src\hooks\ctext.hooks.detchman_resource.ixx" />

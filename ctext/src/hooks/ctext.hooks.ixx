@@ -11,6 +11,7 @@ import :field_impl;
 import :msg_window;
 import :name_input_scene;
 import :sound_mananger;
+import :sound_task;
 import :text_manager;
 
 
@@ -25,6 +26,7 @@ export namespace ctext::hooks {
 		EnableCtrHooks();
 		EnableCtrResourceManagerHooks();
 		EnableSoundManagerHooks();
+		EnableSoundTaskHooks();
 
 #ifdef FEATURE_VOICE_ACTING
 		EnableNameInputSceneHooks();

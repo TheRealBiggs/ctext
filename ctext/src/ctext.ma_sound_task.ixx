@@ -52,7 +52,7 @@ export namespace ctext {
 			if (sound->isOneShot)
 				maId = ctext::AudioManager::Get().PlayOneShot(sound->data, sound->dataLength);
 			else
-				maId = ctext::AudioManager::Get().PlayLooping(sound->data, sound->dataLength, -1, -1);
+				maId = ctext::AudioManager::Get().PlayLooping(sound->data, sound->dataLength, -1, -1, value);
 
 			isPlaying = true;
 			isPaused = false;
@@ -60,6 +60,15 @@ export namespace ctext {
 		}
 
 		virtual void stop() override {
+			if (sound->type == ct::audio::SoundObj::SoundType::BGM) {
+				if (sound->id == 0x45)
+					ct::audio::resumePrevBgm = true;
+				else {
+					ct::audio::prevBgmId = sound->id;
+					ct::audio::prevBgmTime = getCurrentTime();
+				}
+			}
+
 			ctext::AudioManager::Get().Stop(maId);
 
 			isPlaying = false;
@@ -100,7 +109,7 @@ export namespace ctext {
 		}
 
 		virtual float getCurrentTime() override {
-			return static_cast<float>(ctext::AudioManager::Get().GetTime(maId));
+			return ctext::AudioManager::Get().GetTime(maId);
 		}
 
 
