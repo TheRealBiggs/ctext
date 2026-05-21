@@ -52,7 +52,7 @@ export namespace ctext {
 			if (sound->isOneShot)
 				maId = ctext::AudioManager::Get().PlayOneShot(sound->data, sound->dataLength);
 			else
-				maId = ctext::AudioManager::Get().PlayLooping(sound->data, sound->dataLength, -1, -1, value);
+				maId = ctext::AudioManager::Get().PlayLooping(sound->data, sound->dataLength, value);
 
 			isPlaying = true;
 			isPaused = false;

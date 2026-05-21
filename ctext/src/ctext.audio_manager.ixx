@@ -1,6 +1,14 @@
 module;
 
+#define STB_VORBIS_HEADER_ONLY
+#include <stb_vorbis.c>
+
+#define MINIAUDIO_IMPLEMENTATION
 #include <miniaudio.h>
+
+#undef STB_VORBIS_HEADER_ONLY
+#include <stb_vorbis.c>
+
 #include <cstdint>
 
 export module ctext.audio_manager;
@@ -43,8 +51,9 @@ export namespace ctext {
 
 		int PlayOneShot(const uint8_t* data, size_t dataLen) {
 			auto* sound = BorrowSound();
+			ma_encoding_format format;
 
-			if (!InitialiseSoundFromData(sound, data, dataLen))
+			if (!InitialiseSoundFromData(sound, data, dataLen, format))
 				return -1;
 
 			auto id = nextSoundId++;
@@ -78,11 +87,38 @@ export namespace ctext {
 		//	return id;
 		//}
 
-		int PlayLooping(const uint8_t* data, size_t dataLen, uint64_t loopStart, uint64_t loopEnd, float startTime = 0) {
+		int PlayLooping(const uint8_t* data, size_t dataLen, float startTime = 0, uint64_t loopStart = -1, uint64_t loopEnd = -1) {
 			auto* sound = BorrowSound();
+			ma_encoding_format format = ma_encoding_format_unknown;
 
-			if (!InitialiseSoundFromData(sound, data, dataLen))
+			if (!InitialiseSoundFromData(sound, data, dataLen, format))
 				return -1;
+
+			if (format == ma_encoding_format_vorbis) {
+				auto* decoder = reinterpret_cast<ma_decoder*>(sound->pDataSource);
+				auto* backend = reinterpret_cast<ma_stbvorbis*>(decoder->pBackend);
+				auto* stb = backend->stb;
+
+				auto comments = stb_vorbis_get_comment(stb);
+
+				for (int i = 0; i < comments.comment_list_length; ++i) {
+					auto* comment = comments.comment_list[i];
+					std::string sComment(comment);
+
+					if (loopStart == -1 && sComment.starts_with("LOOP_START")) {
+						auto sVal = sComment.substr(strlen("LOOP_START="));
+						loopStart = std::stoi(sVal);
+					}
+
+					if (loopEnd == -1 && sComment.starts_with("LOOP_END")) {
+						auto sVal = sComment.substr(strlen("LOOP_END="));
+						loopEnd = std::stoi(sVal);
+					}
+
+					if (loopStart != -1 && loopEnd != -1)
+						break;
+				}
+			}
 
 			if (!SetupSoundLoop(sound, loopStart, loopEnd))
 				return -1;
@@ -165,7 +201,10 @@ export namespace ctext {
 			return true;
 		}
 
-		inline bool InitialiseSoundFromData(ma_sound* sound, const uint8_t* data, size_t dataLen) {
+		inline bool InitialiseSoundFromData(ma_sound* sound, const uint8_t* data, size_t dataLen, ma_encoding_format& outFormat) {
+			if (*reinterpret_cast<const uint32_t*>(data) == 0x5367674F /* OggS */)
+				outFormat = ma_encoding_format_vorbis;
+
 			auto* decoder = new ma_decoder;
 			auto res = ma_decoder_init_memory(data, dataLen, nullptr, decoder);
 

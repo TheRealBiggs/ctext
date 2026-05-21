@@ -12,6 +12,8 @@ import ctext.io;
 
 import std;
 
+#define LOG_RES_HOOK 1
+
 
 namespace {
 	std::vector<mz_zip_archive*> loadedCtpArchives;
@@ -48,7 +50,9 @@ namespace {
 
 
 	HOOK_RET(DetchmanResource_LoadFileEntry, __stdcall, uint8_t*, const std::string& filename, size_t* outLen) {
+#if LOG_RES_HOOK
 		LOG_DEBUG("RES_HOOK: " << filename);
+#endif
 
 		std::string lcFilename = filename;
 		std::transform(
@@ -63,7 +67,9 @@ namespace {
 
 		const auto* entry = overridenFilepaths[lcFilename];
 
+#if LOG_RES_HOOK
 		LOG_DEBUG("RES_HOOK: Redirecting to " << entry->GetFilePath());
+#endif
 
 		auto* buf = entry->GetData(outLen);
 
