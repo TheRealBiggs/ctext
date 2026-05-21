@@ -8,15 +8,20 @@ CTExt is a replacement sqlite3.dll for the PC port of Chrono Trigger. Its main g
 
 ## What does it do?
 
-As of the time of writing, CTExt fixes one bug (diagonal movement stutter) and allows modding via loose files or by loading CTP files.
+* Fixes the diagonal movement stutter bug by reverting to the original behaviour.
+* Fixes the bug with music not resuming after a battle.
+* Adds modding capabilities via loose files or by loading CTP files.
+* Allows users to disable linear filtering on text and sprites to achieve a pixelated look.
+* Enables font replacement and forcing a fixed font size for all text.
+* Adds the ability to play audio during character dialogue. This feature was developed for [Echo-S CT](https://www.youtube.com/watch?v=hBHh6A83HHc) to enable voice acting.
 
 ## What is planned for the future?
 
-There are still bugs with music not pausing when entering a battle and diagonal movement stutter with the Epoch. There are also plans to implement a modding API to allow for mods that can achieve what simple file replacements can't.
+Check out the current [issues](https://github.com/TheRealBiggs/ctext/issues) to see what work is planned.
 
 ## Where can I download it?
 
-You can either compile CTExt yourself using Visual Studio 2022, or find pre-built releases on the Moogles & Mods Discord server.
+You can compile CTExt yourself using Visual Studio 2022 or use a [pre-built release](https://github.com/TheRealBiggs/ctext/releases).
 
 ## How do I install it?
 
@@ -43,4 +48,4 @@ You can contribute to CTExt in many ways!
 * Contribute to the reverse-engineering effort that makes this work possible.
 * Help test development releases and report any issues you may find.
 * Show your support by sharing a link to this repo with your friends!
-* Support me on [Ko-fi](https://ko-fi.com/therealbiggs)
+* Support me on [Ko-fi](https://ko-fi.com/therealbiggs).
