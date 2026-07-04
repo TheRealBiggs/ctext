@@ -28,12 +28,12 @@ jobs:
       BUILD_CONFIGURATION: ${{matrix.configuration}}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: true
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v3
 
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
