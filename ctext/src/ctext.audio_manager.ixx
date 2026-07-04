@@ -20,17 +20,10 @@ import std;
 
 export namespace ctext {
 	class AudioManager final : public Singleton<AudioManager> {
+		friend class Singleton<AudioManager>;
+
+
 	public:
-		AudioManager() {
-			engine = new ma_engine();
-			ma_engine_init(nullptr, engine);
-		}
-
-		~AudioManager() {
-			ma_engine_uninit(engine);
-			delete engine;
-		}
-
 		int PlayOneShot(const std::string& filepath) {
 			auto* sound = BorrowSound();
 
@@ -68,24 +61,24 @@ export namespace ctext {
 			return id;
 		}
 
-		//int PlayLooping(const std::string& filepath, uint64_t loopStart, uint64_t loopEnd) {
-		//	auto* sound = BorrowSound();
+		/*int PlayLooping(const std::string& filepath, uint64_t loopStart, uint64_t loopEnd) {
+			auto* sound = BorrowSound();
 
-		//	if (!InitialiseSoundFromFile(sound, filepath))
-		//		return -1;
+			if (!InitialiseSoundFromFile(sound, filepath))
+				return -1;
 
-		//	if (!SetupSoundLoop(sound, loopStart, loopEnd))
-		//		return -1;
+			if (!SetupSoundLoop(sound, loopStart, loopEnd))
+				return -1;
 
-		//	if (!StartSound(sound))
-		//		return -1;
+			if (!StartSound(sound))
+				return -1;
 
-		//	auto id = nextSoundId++;
+			auto id = nextSoundId++;
 
-		//	activeSounds[id] = sound;
+			activeSounds[id] = sound;
 
-		//	return id;
-		//}
+			return id;
+		}*/
 
 		int PlayLooping(const uint8_t* data, size_t dataLen, float startTime = 0, uint64_t loopStart = -1, uint64_t loopEnd = -1) {
 			auto* sound = BorrowSound();
@@ -173,6 +166,17 @@ export namespace ctext {
 
 
 	private:
+		AudioManager() {
+			engine = new ma_engine();
+			ma_engine_init(nullptr, engine);
+		}
+
+		~AudioManager() {
+			ma_engine_uninit(engine);
+			delete engine;
+		}
+
+
 		inline ma_sound* BorrowSound() {
 			ma_sound* sound;
 

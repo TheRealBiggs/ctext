@@ -6,9 +6,12 @@ module;
 
 export module ct:chrono_canvas;
 
+import ct.addr;
 import ct.audio;
 
 import std;
+
+using namespace ct::addr;
 
 
 export namespace ct {
@@ -91,7 +94,7 @@ export namespace ct {
 
 
 		static ChronoCanvas* getInstance() {
-			return *ADDR_AS(ChronoCanvas**, 0x41B4C4);
+			return *ADDR_AS(ChronoCanvas**, CHRONO_CANVAS_INSTANCE);
 		}
 
 

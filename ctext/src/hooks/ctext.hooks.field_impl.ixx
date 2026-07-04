@@ -5,12 +5,19 @@ module;
 export module ctext.hooks:field_impl;
 
 import ct;
+import ct.addr;
 import ctext.config;
+
+using namespace ct;
+using namespace ct::addr;
 
 
 namespace {
-	HOOK_CLSFN(FieldImpl_UserScrollDiagonal, ct::FieldImpl, int x, int y, bool a3, bool a4, bool a5) {
-		auto* dword854 = _this->dword854;
+	C_FN_HOOK_A(
+		void, FieldImpl, UserScrollDiagonal,
+		FIELD_IMPL_USER_SCROLL_DIAGONAL,
+		int, x, int, y, bool, a3, bool, a4, bool, a5
+	) {
 		dword854[36] = x;
 		dword854[37] = y;
 
@@ -26,6 +33,6 @@ namespace {
 export namespace ctext::hooks {
 	void EnableFieldImplHooks() {
 		if (ctext::Config::Get().FixesRevertDiagonalMovement)
-			ENABLE_HOOK(FieldImpl_UserScrollDiagonal, 0x175DA0);
+			ENABLE_C_FN_HOOK(FieldImpl, UserScrollDiagonal);
 	}
 }

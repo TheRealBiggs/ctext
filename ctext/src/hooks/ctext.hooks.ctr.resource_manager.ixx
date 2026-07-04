@@ -6,13 +6,20 @@ module;
 
 export module ctext.hooks:ctr.resource_manager;
 
+import ct.addr;
 import ctext.config;
 
 import std;
 
+using namespace ct::addr;
+
 
 namespace {
-	HOOK_RET(ctr_ResourceManager_createTexture, __fastcall, cocos2d::Texture2D*, std::string* filename, cocos2d::Image* image) {
+	FN_HOOK_A(
+		__fastcall, cocos2d::Texture2D*, ctr_ResourceManager_createTexture,
+		CTR_RESOURCE_MANAGER_CREATE_TEXTURE,
+		std::string*, filename, cocos2d::Image*, image
+	) {
 		auto* res = CALL_ORIG(ctr_ResourceManager_createTexture, filename, image);
 
 		if (res != nullptr)
@@ -26,6 +33,6 @@ namespace {
 namespace ctext::hooks {
 	void EnableCtrResourceManagerHooks() {
 		if (ctext::Config::Get().GraphicsForceNearestFilter)
-			ENABLE_HOOK(ctr_ResourceManager_createTexture, 0x19AC50);
+			ENABLE_FN_HOOK(ctr_ResourceManager_createTexture);
 	}
 }

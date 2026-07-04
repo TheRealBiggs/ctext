@@ -6,16 +6,10 @@ module;
 
 export module ct.audio:sound_obj;
 
+import ct.addr;
+import sqex.sd.driver;
 
-export namespace SQEX::Sd::Driver {
-	struct SoundController {
-		uint32_t dword0;
-		uint32_t dword4;
-
-		static ADDR_AS_FUNC(int, __fastcall, Play, 0x2F0930, SoundController*, _this, int, _, float, a2, float, a3, int, a4);
-		static ADDR_AS_FUNC(void, __fastcall, Resume, 0x2F0AC0, SoundController*, _this, int, _, float, a2, int, a3);
-	};
-}
+using namespace ct::addr;
 
 
 export namespace ct::audio {
@@ -26,6 +20,13 @@ export namespace ct::audio {
 			SE_1,
 			SE_2
 		};
+
+
+		FN_CC(
+			__fastcall, void*, createSound,
+			SOUND_OBJ_CREATE_SOUND,
+			unsigned int, a1, unsigned int, a2
+		);
 		
 
 		int id;

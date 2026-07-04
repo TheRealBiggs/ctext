@@ -63,10 +63,7 @@
     <ClCompile Include="..\modules\minhook\src\trampoline.c">
       <Filter>Deps\minhook</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\sqexlogo_hook.cpp">
-      <Filter>Source Files\hooks</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenes\logo.ixx">
+    <ClCompile Include="src\scenes\ctext.scenes.logo_scene.ixx">
       <Filter>Source Files\scenes</Filter>
     </ClCompile>
     <ClCompile Include="src\ctext.voice_acting_manager.ixx">
@@ -147,7 +144,7 @@
     <ClCompile Include="src\hooks\ctext.hooks.sound_manager.ixx">
       <Filter>Source Files\hooks</Filter>
     </ClCompile>
-    <ClCompile Include="src\hooks\ctext.hooks.sqexlogo.ixx">
+    <ClCompile Include="src\hooks\ctext.hooks.sqex_logo_scene.ixx">
       <Filter>Source Files\hooks</Filter>
     </ClCompile>
     <ClCompile Include="src\hooks\ctext.hooks.text_manager.ixx">
@@ -180,6 +177,30 @@
     <ClCompile Include="src\hooks\ctext.hooks.render.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="deps\quickjs\quickjs-amalgam.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ctext.script_manager.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\ctext.scenes.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ctr\ct.ctr.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ctr\ct.ctr.resource_manager.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ct\ct.addresses.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sqex\sd\driver\sqex.sd.driver.sound_controller.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sqex\sd\driver\sqex.sd.driver.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\helpers.hpp">
@@ -191,17 +212,17 @@
     <ClInclude Include="res\resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ct\subs.hpp">
-      <Filter>Header Files\ct</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ct\unkstructh.hpp">
-      <Filter>Header Files\ct</Filter>
-    </ClInclude>
     <ClInclude Include="deps\glfw3\glfw3.h">
       <Filter>Deps</Filter>
     </ClInclude>
     <ClInclude Include="deps\glfw3\glfw3native.h">
       <Filter>Deps</Filter>
+    </ClInclude>
+    <ClInclude Include="deps\miniz\miniz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="deps\quickjs\quickjs.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

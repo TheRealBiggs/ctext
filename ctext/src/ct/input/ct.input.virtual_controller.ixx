@@ -4,6 +4,10 @@ module;
 
 export module ct.input:virtual_controller;
 
+import ct.addr;
+
+using namespace ct::addr;
+
 
 export namespace ct::input {
 	class VirtualController {
@@ -25,16 +29,16 @@ export namespace ct::input {
 
 
 		static VirtualController* getInstance() {
-			auto* instance = *ADDR_AS(VirtualController**, 0x3FB30C);
+			auto* instance = *ADDR_AS(VirtualController**, VIRTUAL_CONTROLLER_INSTANCE_);
 
 			if (instance == nullptr)
-				instance = ADDR_AS(VirtualController*, 0x41C3DC);
+				instance = ADDR_AS(VirtualController*, INVALID_CONTROLLER_INSTANCE_);
 
 			return instance;
 		}
 
 		static void setInstance(VirtualController* instance) {
-			*ADDR_AS(VirtualController**, 0x3FB30C) = instance;
+			*ADDR_AS(VirtualController**, VIRTUAL_CONTROLLER_INSTANCE_) = instance;
 		}
 
 

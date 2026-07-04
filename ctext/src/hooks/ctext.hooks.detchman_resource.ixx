@@ -7,10 +7,13 @@ module;
 
 export module ctext.hooks:detchman_resource;
 
+import ct.addr;
 import ctext.config;
 import ctext.io;
 
 import std;
+
+using namespace ct::addr;
 
 #define LOG_RES_HOOK 1
 
@@ -49,7 +52,11 @@ namespace {
 	}
 
 
-	HOOK_RET(DetchmanResource_LoadFileEntry, __stdcall, uint8_t*, const std::string& filename, size_t* outLen) {
+	FN_HOOK_A(
+		__stdcall, uint8_t*, DetchmanResource_LoadFileEntry,
+		DETCHMAN_RESOURCE_LOAD_FILE_ENTRY,
+		const std::string&, filename, size_t*, outLen
+	) {
 #if LOG_RES_HOOK
 		LOG_DEBUG("RES_HOOK: " << filename);
 #endif
@@ -80,6 +87,11 @@ namespace {
 
 export namespace ctext::hooks {
 	void InitialiseDetchmanResourceHooks() {
+		const auto& cfg = ctext::Config::Get();
+
+		if (!cfg.ModsEnabled)
+			return;
+
 		if (!std::filesystem::exists("mods"))
 			return;
 
@@ -87,17 +99,22 @@ export namespace ctext::hooks {
 
 		for (const auto& load : loadOrder) {
 			auto modPath = "mods" / std::filesystem::path(load);
-			std::filesystem::path ctpPath(modPath);
-			ctpPath.replace_extension(".ctp");
 
-			if (std::filesystem::exists(ctpPath)) {
-				LoadCtpArchive(ctpPath);
+			if (cfg.ModsEnableCtpLoading) {
+				std::filesystem::path ctpPath(modPath);
+				ctpPath.replace_extension(".ctp");
 
-				continue;
+				if (std::filesystem::exists(ctpPath)) {
+					LoadCtpArchive(ctpPath);
+
+					continue;
+				}
 			}
 
-			if (!std::filesystem::exists(modPath))
+			if (!std::filesystem::exists(modPath)) {
+				LOG_ERROR("Mod path not found '" << load << "'!");
 				continue;
+			}
 
 			const auto iter = std::filesystem::recursive_directory_iterator(modPath);
 
@@ -122,10 +139,14 @@ export namespace ctext::hooks {
 	}
 
 	void EnableDetchmanResourceHooks() {
-		ENABLE_HOOK(DetchmanResource_LoadFileEntry, 0xB9DD0);
+		if (ctext::Config::Get().ModsEnabled)
+			ENABLE_FN_HOOK(DetchmanResource_LoadFileEntry);
 	}
 
 	void UninitialiseDetchmanResourceHooks() {
+		if (!ctext::Config::Get().ModsEnabled)
+			return;
+
 		for (auto& ctp : loadedCtpArchives)
 			mz_zip_reader_end(ctp);
 	}

@@ -4,18 +4,26 @@ module;
 
 export module ctext.hooks:name_input_scene;
 
+import ct.addr;
 import ct.scene;
+
+using namespace ct::addr;
+using namespace ct::scene;
 
 
 namespace {
-	HOOK_CLSFN(NameInputScene_update, ct::scene::NameInputScene, float delta) {
-		ct::scene::SceneManager::popScene();
+	C_FN_HOOK_A(
+		void, NameInputScene, update,
+		NAME_INPUT_SCENE_UPDATE,
+		float, delta
+	) {
+		SceneManager::popScene();
 	}
 }
 
 
 export namespace ctext::hooks {
 	void EnableNameInputSceneHooks() {
-		ENABLE_HOOK(NameInputScene_update, 0x2C2C50);
+		ENABLE_C_FN_HOOK(NameInputScene, update);
 	}
 }

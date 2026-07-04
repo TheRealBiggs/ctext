@@ -4,28 +4,39 @@ module;
 
 export module ctext.hooks:msg_window;
 
+import ct.addr;
 import ct.ui;
 import ctext.voice_acting_manager;
 
+using namespace ct::addr;
+using namespace ct::ui;
+
 
 namespace {
-	HOOK_CLSFN(MsgWindow_Close, ct::ui::MsgWindow, bool a2) {
+	C_FN_HOOK_A(
+		void, MsgWindow, Close,
+		MSG_WINDOW_CLOSE,
+		bool, a2
+	) {
 		ctext::VoiceActingManager::Get().Stop();
 
-		CALL_ORIG(MsgWindow_Close, _this, a2);
+		C_CALL_ORIG(a2);
 	}
 
-	HOOK_CLSFN(MsgWindow_setup, ct::ui::MsgWindow) {
+	C_FN_HOOK_A(
+		void, MsgWindow, setup,
+		MSG_WINDOW_SETUP
+	) {
 		ctext::VoiceActingManager::Get().PlayNextPage();
 
-		CALL_ORIG(MsgWindow_setup, _this);
+		C_CALL_ORIG();
 	}
 }
 
 
 export namespace ctext::hooks {
 	void EnableMsgWindowHooks() {
-		ENABLE_HOOK(MsgWindow_Close, 0x195C70);
-		ENABLE_HOOK(MsgWindow_setup, 0x195E30);
+		ENABLE_C_FN_HOOK(MsgWindow, Close);
+		ENABLE_C_FN_HOOK(MsgWindow, setup);
 	}
 }

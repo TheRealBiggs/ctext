@@ -6,9 +6,12 @@ module;
 
 export module ctext.hooks:ctr;
 
+import ct.addr;
 import ctext.config;
 
 import std;
+
+using namespace ct::addr;
 
 
 namespace {
@@ -31,7 +34,11 @@ namespace {
 	}
 
 
-	HOOK_RET(ctr_CreateLabel, __fastcall, cocos2d::Label*, std::string const& text, int fontSize) {
+	FN_HOOK_A(
+		__fastcall, cocos2d::Label*, ctr_CreateLabel,
+		CTR_CREATE_LABEL,
+		std::string const&, text, int, fontSize
+	) {
 		const auto& cfg = ctext::Config::Get();
 
 		cocos2d::Label* label = nullptr;
@@ -54,6 +61,9 @@ namespace {
 
 export namespace ctext::hooks {
 	void EnableCtrHooks() {
-		ENABLE_HOOK(ctr_CreateLabel, 0xFA90);
+		const auto& cfg = ctext::Config::Get();
+
+		if (cfg.FontUseCustomFont || cfg.FontUseFixedFontSize || cfg.FontForceNearestFilter)
+			ENABLE_FN_HOOK(ctr_CreateLabel);
 	}
 }

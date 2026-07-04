@@ -4,11 +4,16 @@ module;
 
 export module ctext.hooks:render;
 
+import ct.addr;
 import ctext.config;
 
 
 namespace {
-	HOOK(DrawExclamationMark, __fastcall, int x, int y/*, int spriteIdx*/ ) {
+	FN_HOOK_A(
+		__fastcall, void, DrawExclamationMark,
+		ct::addr::DRAW_EXCLAMATION_MARK,
+		int, x, int, y/*, int, spriteIdx*/
+	) {
 		// Do nothing
 	}
 }
@@ -17,6 +22,6 @@ namespace {
 export namespace ctext::hooks {
 	void EnableRenderHooks() {
 		if (ctext::Config::Get().MiscDisableFieldActionIndicator)
-			ENABLE_HOOK(DrawExclamationMark, 0x0D8590);
+			ENABLE_FN_HOOK(DrawExclamationMark);
 	}
 }

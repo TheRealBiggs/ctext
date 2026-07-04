@@ -1,6 +1,7 @@
 {
 	"fixes": {
-		"revert_diagonal_movement": true
+		"revert_diagonal_movement": true,
+		"fix_bgm_resume_after_battle": true
 	},
 
 	"graphics": {
@@ -18,10 +19,15 @@
 	},
 
 	"misc": {
+		"enable_file_replacement": true,
+		"enable_ctp_loading": true,
 		"disable_field_action_indicator": true
 	},
 
 	"mods": {
+		"enabled": true,
+		"enable_ctp_loading": true,
+		
 		"load_order": [
 
 		]

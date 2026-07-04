@@ -67,6 +67,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
+      <AdditionalOptions>/experimental:c11atomics %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -87,6 +88,7 @@
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
+      <AdditionalOptions>/experimental:c11atomics %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -101,11 +103,17 @@
     <ClCompile Include="..\modules\minhook\src\hde\hde32.c" />
     <ClCompile Include="..\modules\minhook\src\hook.c" />
     <ClCompile Include="..\modules\minhook\src\trampoline.c" />
+    <ClCompile Include="deps\quickjs\quickjs-amalgam.c">
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4251;4250;4146;4703</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="src\ctext.audio_manager.ixx" />
     <ClCompile Include="src\ctext.config.ixx" />
     <ClCompile Include="src\ctext.ma_sound_task.ixx" />
+    <ClCompile Include="src\ctext.script_manager.ixx" />
     <ClCompile Include="src\ctext.singleton.ixx" />
     <ClCompile Include="src\ctext.voice_acting_manager.ixx" />
+    <ClCompile Include="src\sqex\sd\driver\sqex.sd.driver.ixx" />
+    <ClCompile Include="src\sqex\sd\driver\sqex.sd.driver.sound_controller.ixx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="deps\miniz\miniz.c">
@@ -113,16 +121,20 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="deps\miniz\miniz.h" />
+    <ClInclude Include="deps\quickjs\quickjs.h" />
     <ClInclude Include="include\build_config.hpp" />
+    <ClCompile Include="src\ct\ct.addresses.ixx" />
     <ClCompile Include="src\ct\ct.chrono_canvas.ixx" />
     <ClCompile Include="src\ct\ct.ixx" />
-    <ClInclude Include="include\ct\unkstructh.hpp" />
     <ClCompile Include="src\ct\audio\ct.audio.sound_manager.ixx" />
     <ClCompile Include="src\ct\audio\ct.audio.ixx" />
     <ClCompile Include="src\ct\audio\ct.audio.sound_obj.ixx" />
     <ClCompile Include="src\ct\audio\ct.audio.sound_task.ixx" />
     <ClCompile Include="src\ct\ct.field_impl.ixx" />
     <ClCompile Include="src\ct\ct.text_manager.ixx" />
+    <ClCompile Include="src\ct\ctr\ct.ctr.ixx" />
+    <ClCompile Include="src\ct\ctr\ct.ctr.resource_manager.ixx" />
     <ClCompile Include="src\ct\input\ct.input.ixx" />
     <ClCompile Include="src\ct\input\ct.input.virtual_controller.ixx" />
     <ClCompile Include="src\ct\scene\ct.scene.ixx" />
@@ -142,17 +154,16 @@
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\hooks\ctext.hooks.field_impl.ixx" />
     <ClCompile Include="src\hooks\ctext.hooks.ixx" />
-    <ClCompile Include="src\hooks\ctext.hooks.sqexlogo.ixx" />
+    <ClCompile Include="src\hooks\ctext.hooks.sqex_logo_scene.ixx" />
     <ClCompile Include="src\io\ctext.io.filesystem_file_entry.ixx" />
     <ClCompile Include="src\io\ctext.io.file_entry.ixx" />
     <ClCompile Include="src\io\ctext.io.ixx" />
     <ClCompile Include="src\io\ctext.io.zip_file_entry.ixx" />
-    <ClCompile Include="src\scenes\logo.ixx" />
-    <ClCompile Include="src\hooks\sqexlogo_hook.cpp" />
+    <ClCompile Include="src\scenes\ctext.scenes.ixx" />
+    <ClCompile Include="src\scenes\ctext.scenes.logo_scene.ixx" />
     <ClInclude Include="res\resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\ct\subs.hpp" />
     <ClInclude Include="deps\glfw3\glfw3.h" />
     <ClInclude Include="deps\glfw3\glfw3native.h" />
     <ClInclude Include="include\helpers.hpp" />

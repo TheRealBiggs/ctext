@@ -40,6 +40,9 @@ namespace {
 
 export namespace ctext {
 	class VoiceActingManager final : public Singleton<VoiceActingManager> {
+		friend class Singleton<VoiceActingManager>;
+
+
 	public:
 		void Setup(int msgFileId, int msgId, const std::string& dialogue) {
 			if (msgFileId < 27 || msgFileId > 59)

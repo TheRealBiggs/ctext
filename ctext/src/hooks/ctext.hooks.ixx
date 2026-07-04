@@ -13,6 +13,7 @@ import :name_input_scene;
 import :render;
 import :sound_mananger;
 import :sound_task;
+import :sqex_logo_scene;
 import :text_manager;
 
 
@@ -29,6 +30,7 @@ export namespace ctext::hooks {
 		EnableRenderHooks();
 		EnableSoundManagerHooks();
 		EnableSoundTaskHooks();
+		EnableSqexLogoSceneHooks();
 
 #ifdef FEATURE_VOICE_ACTING
 		EnableMsgWindowHooks();

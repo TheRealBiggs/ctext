@@ -47,7 +47,6 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 
 			CreateDebugConsole();
 			MH_Initialize();
-			ctext::Config::Get().Initialise();
 
 			ctext::hooks::InitialiseHooks();
 			ctext::hooks::EnableHooks();
