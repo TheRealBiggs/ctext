@@ -53,4 +53,3 @@ jobs:
           build/${{matrix.configuration}}/*.dll
           build/${{matrix.configuration}}/ChronoType.ttf
           build/${{matrix.configuration}}/ctext.json
-          build/${{matrix.configuration}}/loader.cfg
