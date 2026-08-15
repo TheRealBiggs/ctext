@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CTExt", "ctext\CTExt.vcxproj", "{74EC9696-6490-403E-97D9-C89D193B7A1E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Loader", "loader\Loader.vcxproj", "{3F7EA042-6FE1-490A-9436-62D65F73B24F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinMM Proxy", "loader\Loader.vcxproj", "{3F7EA042-6FE1-490A-9436-62D65F73B24F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

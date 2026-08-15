@@ -1,0 +1,5 @@
+LIBRARY winmm
+
+EXPORTS
+    joyGetNumDevs=_joyGetNumDevs@0
+    joyGetPosEx=_joyGetPosEx@8

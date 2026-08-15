@@ -104,7 +104,7 @@
     <ClCompile Include="..\modules\minhook\src\hook.c" />
     <ClCompile Include="..\modules\minhook\src\trampoline.c" />
     <ClCompile Include="deps\quickjs\quickjs-amalgam.c">
-      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4251;4250;4146;4703</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4251;4250;4146;4703</DisableSpecificWarnings>
     </ClCompile>
     <ClCompile Include="src\ctext.audio_manager.ixx" />
     <ClCompile Include="src\ctext.config.ixx" />

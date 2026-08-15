@@ -1,31 +1,60 @@
 #define WIN32_LEAN_AND_MEAN
 #define VC_EXTRALEAN
+#define _WINMM_
 
-#include <Windows.h>
+#include <windows.h>
+#include <mmsystem.h>
 
-#include <fstream>
-#include <string>
+namespace {
 
+using JoyGetPosExFn = MMRESULT(WINAPI*)(UINT, LPJOYINFOEX);
+using JoyGetNumDevsFn = UINT(WINAPI*)();
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
-	switch (ul_reason_for_call) {
-	case DLL_PROCESS_ATTACH:
-	{
-		DisableThreadLibraryCalls(hModule);
+INIT_ONCE winmmInitOnce = INIT_ONCE_STATIC_INIT;
+JoyGetPosExFn realJoyGetPosEx;
+JoyGetNumDevsFn realJoyGetNumDevs;
 
-		std::ifstream cfg("loader.cfg");
+BOOL CALLBACK LoadSystemWinmm(PINIT_ONCE, PVOID, PVOID*) {
+	wchar_t path[MAX_PATH];
+	const UINT length = GetSystemDirectoryW(path, MAX_PATH);
+	if (!length || length + 11 >= MAX_PATH)
+		return FALSE;
 
-		std::string line;
-		
-		while (std::getline(cfg, line)) {
-			if (line[0] == '#')
-				continue;
+	lstrcatW(path, L"\\winmm.dll");
+	const HMODULE module = LoadLibraryW(path);
+	if (!module)
+		return FALSE;
 
-			LoadLibraryA(line.c_str());
-		}
-	}
-	case DLL_PROCESS_DETACH:
-		break;
+	realJoyGetPosEx = reinterpret_cast<JoyGetPosExFn>(GetProcAddress(module, "joyGetPosEx"));
+	realJoyGetNumDevs = reinterpret_cast<JoyGetNumDevsFn>(GetProcAddress(module, "joyGetNumDevs"));
+	return realJoyGetPosEx && realJoyGetNumDevs;
+}
+
+DWORD WINAPI LoadCTExt(PVOID) {
+	LoadLibraryW(L"ctext.dll");
+	return 0;
+}
+
+} // namespace
+
+extern "C" MMRESULT WINAPI joyGetPosEx(UINT id, LPJOYINFOEX info) {
+	if (!InitOnceExecuteOnce(&winmmInitOnce, LoadSystemWinmm, nullptr, nullptr))
+		return MMSYSERR_ERROR;
+
+	return realJoyGetPosEx(id, info);
+}
+
+extern "C" UINT WINAPI joyGetNumDevs() {
+	if (!InitOnceExecuteOnce(&winmmInitOnce, LoadSystemWinmm, nullptr, nullptr))
+		return 0;
+
+	return realJoyGetNumDevs();
+}
+
+BOOL APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID) {
+	if (reason == DLL_PROCESS_ATTACH) {
+		DisableThreadLibraryCalls(module);
+		QueueUserWorkItem(LoadCTExt, nullptr, WT_EXECUTEDEFAULT);
 	}
 
 	return TRUE;

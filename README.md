@@ -4,7 +4,7 @@
 
 ## What is this?
 
-CTExt is a replacement sqlite3.dll for the PC port of Chrono Trigger. Its main goals are to fix bugs and allow easy modding of the game.
+CTExt is an extension framework for the PC port of Chrono Trigger. Its main goals are to fix bugs and allow easy modding of the game.
 
 ## What does it do?
 
@@ -27,18 +27,18 @@ You can compile CTExt yourself using Visual Studio 2022 or use a [pre-built rele
 
 If you are using a pre-built release of CText, just extract the .7z archive directly into the folder where Chrono Trigger is installed.
 
-If you choose to compile CTExt yourself, you will need to rename Chrono Trigger's existing `sqlite3.dll` to `sqlite3.orig.dll`, then copy over the compiled `sqlite3.dll`, `ctext.dll`, `ctext.json`, and `loader.cfg` files to your Chrono Trigger installation folder.
+If you choose to compile CTExt yourself, copy the compiled `winmm.dll`, `ctext.dll`, `ctext.json`, and `ChronoType.ttf` files to your Chrono Trigger installation folder.
 
 ## How do I uninstall it?
 
-Delete `sqlite3.dll` from your Chrono Trigger installation folder and rename `sqlite3.orig.dll` to `sqlite3.dll`, or remove the `ctext.dll` entry in `loader.cfg`.
+Delete `winmm.dll`, `ctext.dll`, `ctext.json`, and `ChronoType.ttf` from your Chrono Trigger installation folder.
 
 ## What are all these files?
 
-* `sqlite3.dll` is a proxy DLL for the original SQLite library that is used by Cocos2d, the game engine used by the PC port of Chrono Trigger. By using a local DLL file with the same name, we can force Chrono Trigger.exe to load our code, allowing us to inject hooks into the game. These hooks change how the code in the game works so that we can do things like redirecting file loading. `sqlite3.dll` itself does not apply any hooks and is simply a loader for other DLLs.
+* `winmm.dll` is a proxy for the Windows multimedia library. By placing it next to the game executable, Chrono Trigger loads the proxy, which forwards the game's multimedia calls to the system `winmm.dll` and loads `ctext.dll`.
 * `ctext.dll` is the main part of CTExt and contains all of the code and hooks.
 * `ctext.json` is the configuration file for CText. With it, you can choose which built-in mods to apply, configure said mods, and set the load order of mods in the `\mods\` directory.
-* `loader.cfg` is a line-separated file that tells `sqlite3.dll` which DLLs to load. By default, this file only includes `ctext.dll`, but other DLLs (like SpecialK) can be added to this list.
+* `ChronoType.ttf` is the font used by CTExt's text replacement features.
 
 ## How can I help?
 
